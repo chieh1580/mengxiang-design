@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>萌象空間 elePhant bud spacE | 高質感的空間，來自被理解的生活方式</title>
+  <meta name="description" content="萌象空間 elePhant bud spacE — 不是堆疊風格，而是整理出適合你的生活質感。空間諮詢、丈量規劃、全案設計。">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --charcoal: #2C2C2C;
+      --warm-gray: #6B6560;
+      --sand: #B8A99A;
+      --cream: #F5F0EB;
+      --off-white: #FAF8F5;
+      --wood: #A68B6B;
+      --accent: #8C7B6B;
+      --dark-overlay: rgba(30, 28, 26, 0.6);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      color: var(--charcoal);
+      background: var(--off-white);
+      line-height: 1.8;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ========== NAV ========== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.4s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(250, 248, 245, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 20px rgba(0,0,0,0.05);
+      padding: 0.8rem 3rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      transition: all 0.4s;
+    }
+
+    .nav-brand img {
+      height: 2.2rem;
+      filter: brightness(0) invert(1);
+      transition: filter 0.4s;
+    }
+
+    .nav.scrolled .nav-brand img {
+      filter: none;
+    }
+
+    .nav-brand span {
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: var(--off-white);
+      transition: color 0.4s;
+    }
+
+    .nav.scrolled .nav-brand span {
+      color: var(--charcoal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--off-white);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      font-weight: 400;
+      transition: color 0.4s;
+      position: relative;
+    }
+
+    .nav.scrolled .nav-links a {
+      color: var(--warm-gray);
+    }
+
+    .nav-links a:hover {
+      color: var(--sand);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile menu */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--off-white);
+      margin: 6px 0;
+      transition: all 0.3s;
+    }
+
+    .nav.scrolled .nav-toggle span {
+      background: var(--charcoal);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(20, 18, 16, 0.3) 0%,
+        rgba(20, 18, 16, 0.5) 50%,
+        rgba(20, 18, 16, 0.7) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--off-white);
+      max-width: 700px;
+      padding: 0 2rem;
+    }
+
+    .hero-content h1 {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      letter-spacing: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 0.8rem;
+      line-height: 2;
+    }
+
+    .hero-sub {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 1.5rem;
+    }
+
+    .btn-primary, .btn-outline {
+      padding: 0.9rem 2.5rem;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-decoration: none;
+      transition: all 0.4s;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .btn-primary {
+      background: rgba(255,255,255,0.15);
+      color: var(--off-white);
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-primary:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--off-white);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 7rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      color: var(--sand);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--warm-gray);
+      max-width: 600px;
+      line-height: 2;
+    }
+
+    /* ========== PHILOSOPHY ========== */
+    .philosophy {
+      background: var(--off-white);
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+
+    .philosophy-grid {
+      max-width: 1000px;
+      margin: 4rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    .philosophy-card {
+      text-align: left;
+      padding: 2.5rem;
+      border-left: 1px solid var(--sand);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .philosophy-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .philosophy-card h3 {
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      color: var(--charcoal);
+    }
+
+    .philosophy-card p {
+      font-size: 0.9rem;
+      color: var(--warm-gray);
+      line-height: 2;
+    }
+
+    /* ========== QUOTES MARQUEE ========== */
+    .quotes-section {
+      background: var(--charcoal);
+      padding: 4rem 0;
+      overflow: hidden;
+    }
+
+    .quotes-track {
+      display: flex;
+      animation: marquee 40s linear infinite;
+      gap: 4rem;
+    }
+
+    .quote-item {
+      flex-shrink: 0;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      font-weight: 300;
+      white-space: nowrap;
+    }
+
+    .quote-item .dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background: var(--sand);
+      border-radius: 50%;
+      margin: 0 2rem;
+      vertical-align: middle;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ========== PORTFOLIO ========== */
+    .portfolio {
+      background: var(--off-white);
+      padding: 8rem 2rem;
+    }
+
+    .portfolio-header {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .portfolio-tabs {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .portfolio-tab {
+      background: none;
+      border: none;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      color: var(--warm-gray);
+      cursor: pointer;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .portfolio-tab.active {
+      color: var(--charcoal);
+      border-bottom-color: var(--charcoal);
+    }
+
+    .portfolio-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 4/3;
+    }
+
+    .portfolio-item:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .portfolio-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 28, 26, 0);
+      transition: background 0.5s;
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
+    }
+
+    .portfolio-item:hover .overlay {
+      background: rgba(30, 28, 26, 0.3);
+    }
+
+    .portfolio-item .overlay span {
+      color: white;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s;
+    }
+
+    .portfolio-item:hover .overlay span {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== LIGHTBOX ========== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 85vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 1rem;
+      transition: color 0.3s;
+    }
+
+    .lightbox-nav:hover {
+      color: white;
+    }
+
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+
+    /* ========== SERVICES ========== */
+    .services {
+      background: var(--cream);
+      padding: 8rem 2rem;
+      text-align: center;
+    }
+
+    .services-grid {
+      max-width: 1100px;
+      margin: 4rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .service-card {
+      padding: 3rem 2rem;
+      border-right: 1px solid rgba(0,0,0,0.06);
+      transition: all 0.4s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .service-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-card:last-child {
+      border-right: none;
+    }
+
+    .service-card:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      font-size: 0.82rem;
+      color: var(--warm-gray);
+      line-height: 1.9;
+    }
+
+    /* ========== QUIZ ========== */
+    .quiz-section {
+      background: var(--charcoal);
+      color: var(--off-white);
+      padding: 8rem 2rem;
+      text-align: center;
+    }
+
+    .quiz-section .section-label {
+      color: var(--sand);
+    }
+
+    .quiz-section .section-title {
+      color: var(--off-white);
+    }
+
+    .quiz-section .section-subtitle {
+      color: rgba(255,255,255,0.5);
+      margin: 0 auto 3rem;
+    }
+
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .quiz-progress {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .quiz-progress-dot {
+      width: 40px;
+      height: 2px;
+      background: rgba(255,255,255,0.15);
+      transition: background 0.4s;
+    }
+
+    .quiz-progress-dot.active {
+      background: var(--sand);
+    }
+
+    .quiz-progress-dot.done {
+      background: var(--wood);
+    }
+
+    .quiz-question {
+      display: none;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    .quiz-question.active {
+      display: block;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .quiz-question h3 {
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .quiz-option {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1.2rem 1.8rem;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      color: var(--off-white);
+    }
+
+    .quiz-option .opt-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--sand);
+      min-width: 20px;
+    }
+
+    /* Quiz Result */
+    .quiz-result {
+      display: none;
+      text-align: center;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .quiz-result.active {
+      display: block;
+    }
+
+    .quiz-result-type {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      color: var(--sand);
+      margin-bottom: 0.8rem;
+    }
+
+    .quiz-result h3 {
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-result p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 2;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .quiz-result-cta {
+      display: inline-block;
+      padding: 1rem 3rem;
+      border: 1px solid var(--sand);
+      color: var(--sand);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      transition: all 0.4s;
+    }
+
+    .quiz-result-cta:hover {
+      background: var(--sand);
+      color: var(--charcoal);
+    }
+
+    .quiz-restart {
+      margin-top: 1.5rem;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .quiz-restart:hover {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ========== PROCESS ========== */
+    .process {
+      background: var(--off-white);
+      padding: 8rem 2rem;
+      text-align: center;
+    }
+
+    .process-timeline {
+      max-width: 900px;
+      margin: 4rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: var(--sand);
+      opacity: 0.3;
+    }
+
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      flex: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .process-step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .process-number {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--sand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--accent);
+      background: var(--off-white);
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-step h4 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+
+    .process-step p {
+      font-size: 0.78rem;
+      color: var(--warm-gray);
+      max-width: 120px;
+      line-height: 1.7;
+    }
+
+    /* ========== CONTACT ========== */
+    .contact {
+      background: var(--cream);
+      padding: 8rem 2rem;
+    }
+
+    .contact-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+
+    .contact-info h2 {
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info p {
+      font-size: 0.9rem;
+      color: var(--warm-gray);
+      line-height: 2;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-details a {
+      color: var(--warm-gray);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: color 0.3s;
+    }
+
+    .contact-details a:hover {
+      color: var(--charcoal);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 1rem 1.2rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.3s;
+      letter-spacing: 1px;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+      border-color: var(--sand);
+    }
+
+    .contact-form textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      padding: 1rem;
+      background: var(--charcoal);
+      color: var(--off-white);
+      border: none;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .contact-form button:hover {
+      background: var(--warm-gray);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+
+    /* ========== ANIMATIONS ========== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .service-card {
+        border-right: none;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(44,44,44,0.98);
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        z-index: 999;
+      }
+
+      .nav-links.open a {
+        color: var(--off-white) !important;
+        font-size: 1rem;
+      }
+
+      .hero-content h1 {
+        font-size: 1.8rem;
+        letter-spacing: 6px;
+      }
+
+      .hero-tagline {
+        font-size: 0.85rem;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-item:first-child {
+        grid-column: span 1;
+        grid-row: span 1;
+        aspect-ratio: 4/3;
+      }
+
+      .portfolio-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-timeline {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: flex-start;
+        padding-left: 3rem;
+      }
+
+      .process-timeline::before {
+        top: 0;
+        bottom: 0;
+        left: 24px;
+        right: auto;
+        width: 1px;
+        height: auto;
+      }
+
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-brand"><img src="images/logo.png" alt="萌象空間"><span>萌象空間</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#philosophy" onclick="closeMenu()">設計理念</a></li>
+      <li><a href="#portfolio" onclick="closeMenu()">作品集</a></li>
+      <li><a href="#services" onclick="closeMenu()">服務項目</a></li>
+      <li><a href="#quiz" onclick="closeMenu()">空間測驗</a></li>
+      <li><a href="#process" onclick="closeMenu()">設計流程</a></li>
+      <li><a href="#contact" onclick="closeMenu()">預約諮詢</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-slider">
+      <div class="hero-slide active" style="background-image: url('images/project1-1.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('images/project1-3.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('images/project2-1.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('images/project2-2.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>萌象空間</h1>
+      <p class="hero-tagline">高質感的空間，來自被理解的生活方式</p>
+      <p class="hero-sub">elePhant bud spacE</p>
+      <div class="hero-cta">
+        <a href="#quiz" class="btn-primary">開始空間風格測驗</a>
+        <a href="#contact" class="btn-outline">預約一對一諮詢</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- QUOTES MARQUEE -->
+  <div class="quotes-section">
+    <div class="quotes-track">
+      <span class="quote-item">不是空間不夠，是生活還沒被整理 <span class="dot"></span></span>
+      <span class="quote-item">好的家，會讓人慢慢鬆下來 <span class="dot"></span></span>
+      <span class="quote-item">空間真正的質感，是不打擾 <span class="dot"></span></span>
+      <span class="quote-item">療癒感，不只是顏色，而是感受 <span class="dot"></span></span>
+      <span class="quote-item">不是把家塞滿，而是把生活放對位置 <span class="dot"></span></span>
+      <span class="quote-item">真正耐看的空間，住進去才知道 <span class="dot"></span></span>
+      <span class="quote-item">空間整理好了，人也會輕一點 <span class="dot"></span></span>
+      <span class="quote-item">家該承接生活，不該消耗生活 <span class="dot"></span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="quote-item">不是空間不夠，是生活還沒被整理 <span class="dot"></span></span>
+      <span class="quote-item">好的家，會讓人慢慢鬆下來 <span class="dot"></span></span>
+      <span class="quote-item">空間真正的質感，是不打擾 <span class="dot"></span></span>
+      <span class="quote-item">療癒感，不只是顏色，而是感受 <span class="dot"></span></span>
+      <span class="quote-item">不是把家塞滿，而是把生活放對位置 <span class="dot"></span></span>
+      <span class="quote-item">真正耐看的空間，住進去才知道 <span class="dot"></span></span>
+      <span class="quote-item">空間整理好了，人也會輕一點 <span class="dot"></span></span>
+      <span class="quote-item">家該承接生活，不該消耗生活 <span class="dot"></span></span>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy" id="philosophy">
+    <p class="section-label">PHILOSOPHY</p>
+    <h2 class="section-title">設計理念</h2>
+    <p class="section-subtitle" style="margin: 0 auto;">不是堆疊風格，而是整理出適合你的生活質感。<br>好的設計，不只是風格成立，而是生活成立。</p>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <h3>空間影響狀態</h3>
+        <p>有時候不是你特別累，是空間裡太多沒有被整理好的東西，正在默默消耗你。我們相信，好的空間設計能讓情緒慢慢降下來。</p>
+      </div>
+      <div class="philosophy-card">
+        <h3>療癒是感受，不是風格</h3>
+        <p>療癒感不只是奶油色、木頭色，而是這個空間有沒有讓你覺得鬆一點。我們在意的不是視覺堆疊，而是生活被安放。</p>
+      </div>
+      <div class="philosophy-card">
+        <h3>細節被照顧的質感</h3>
+        <p>高質感的空間，來自使用方式被理解、空間有秩序、氛圍有層次。不是華麗，而是每個細節都被妥善安排。</p>
+      </div>
+      <div class="philosophy-card">
+        <h3>不打擾的設計</h3>
+        <p>很多人要的不是豪宅感，而是忙了一整天之後，回家不要再被空間打擾。真正耐看的空間，住進去才知道。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="portfolio-header">
+      <div>
+        <p class="section-label">PORTFOLIO</p>
+        <h2 class="section-title">作品集</h2>
+        <p class="section-subtitle">每一個空間，都是一段生活的整理。</p>
+      </div>
+      <div class="portfolio-tabs">
+        <button class="portfolio-tab active" onclick="switchProject('all')">全部</button>
+        <button class="portfolio-tab" onclick="switchProject('project1')">質感暗調宅</button>
+        <button class="portfolio-tab" onclick="switchProject('project2')">溫潤日光居</button>
+      </div>
+    </div>
+
+    <div class="portfolio-grid" id="portfolioGrid">
+      <!-- 質感暗調宅 -->
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(0)">
+        <img src="images/project1-1.jpg" alt="質感暗調宅 - 客廳" loading="lazy">
+        <div class="overlay"><span>質感暗調宅 — 客廳</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(1)">
+        <img src="images/project1-2.jpg" alt="質感暗調宅 - 吧台" loading="lazy">
+        <div class="overlay"><span>質感暗調宅 — 吧台</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(2)">
+        <img src="images/project1-3.jpg" alt="質感暗調宅 - 全景" loading="lazy">
+        <div class="overlay"><span>質感暗調宅 — 全景</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(3)">
+        <img src="images/project1-4.jpg" alt="質感暗調宅 - 書房" loading="lazy">
+        <div class="overlay"><span>質感暗調宅 — 書房</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(4)">
+        <img src="images/project1-5.jpg" alt="質感暗調宅" loading="lazy">
+        <div class="overlay"><span>質感暗調宅</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(5)">
+        <img src="images/project1-6.jpg" alt="質感暗調宅" loading="lazy">
+        <div class="overlay"><span>質感暗調宅</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(6)">
+        <img src="images/project1-7.jpg" alt="質感暗調宅" loading="lazy">
+        <div class="overlay"><span>質感暗調宅</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(7)">
+        <img src="images/project1-8.jpg" alt="質感暗調宅" loading="lazy">
+        <div class="overlay"><span>質感暗調宅</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project1" onclick="openLightbox(8)">
+        <img src="images/project1-9.jpg" alt="質感暗調宅" loading="lazy">
+        <div class="overlay"><span>質感暗調宅</span></div>
+      </div>
+      <!-- 溫潤日光居 -->
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(9)">
+        <img src="images/project2-1.jpg" alt="溫潤日光居 - 廚房客廳" loading="lazy">
+        <div class="overlay"><span>溫潤日光居 — 廚房客廳</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(10)">
+        <img src="images/project2-2.jpg" alt="溫潤日光居 - 廚房" loading="lazy">
+        <div class="overlay"><span>溫潤日光居 — 廚房</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(11)">
+        <img src="images/project2-3.jpg" alt="溫潤日光居 - 沙發" loading="lazy">
+        <div class="overlay"><span>溫潤日光居 — 沙發</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(12)">
+        <img src="images/project2-4.jpg" alt="溫潤日光居 - 全景" loading="lazy">
+        <div class="overlay"><span>溫潤日光居 — 全景</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(13)">
+        <img src="images/project2-6.jpg" alt="溫潤日光居 - 客廳" loading="lazy">
+        <div class="overlay"><span>溫潤日光居 — 客廳</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(14)">
+        <img src="images/project2-9.jpg" alt="溫潤日光居 - 長廊" loading="lazy">
+        <div class="overlay"><span>溫潤日光居 — 長廊</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(15)">
+        <img src="images/project2-12.jpg" alt="溫潤日光居 - 臥室" loading="lazy">
+        <div class="overlay"><span>溫潤日光居 — 臥室</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(16)">
+        <img src="images/project2-8.jpg" alt="溫潤日光居 - 細節" loading="lazy">
+        <div class="overlay"><span>溫潤日光居 — 細節</span></div>
+      </div>
+      <div class="portfolio-item" data-project="project2" onclick="openLightbox(17)">
+        <img src="images/project2-10.jpg" alt="溫潤日光居" loading="lazy">
+        <div class="overlay"><span>溫潤日光居</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <p class="section-label">SERVICES</p>
+    <h2 class="section-title">服務項目</h2>
+    <p class="section-subtitle" style="margin: 0 auto;">空間的質感，來自細節與生活被妥善安排。</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">&#9671;</span>
+        <h3>空間諮詢</h3>
+        <p>一對一了解你的生活方式與需求，釐清空間方向，建立完整設計藍圖。</p>
+        <p style="margin-top:1rem; color:var(--accent); font-size:0.85rem; font-weight:500;">NT$ 3,500 / 1 小時</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">&#9674;</span>
+        <h3>丈量規劃</h3>
+        <p>實地丈量與空間分析，從動線、收納到機能配置，提供專業規劃建議。</p>
+        <p style="margin-top:1rem; color:var(--accent); font-size:0.85rem; font-weight:500;">NT$ 4,000 / 次</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">&#9675;</span>
+        <h3>全案設計</h3>
+        <p>從風格定義到材質選配，將機能、美感與生活方式整合為完整的空間方案。</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">&#9702;</span>
+        <h3>軟裝搭配</h3>
+        <p>燈光、色彩、家具與飾品的整體搭配，讓空間的氛圍與質感完整到位。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="quiz-section" id="quiz">
+    <p class="section-label">STYLE TEST</p>
+    <h2 class="section-title">空間風格測驗</h2>
+    <p class="section-subtitle">你的空間，適合哪一種生活質感？<br>1 分鐘找出適合你的生活場景。</p>
+
+    <div class="quiz-container">
+      <div class="quiz-progress" id="quizProgress">
+        <div class="quiz-progress-dot active"></div>
+        <div class="quiz-progress-dot"></div>
+        <div class="quiz-progress-dot"></div>
+        <div class="quiz-progress-dot"></div>
+        <div class="quiz-progress-dot"></div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="quiz-question active" data-q="1">
+        <h3>你希望回到家後，<br>最先感受到的是什麼？</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="answerQuiz(1,'A')"><span class="opt-letter">A</span>放鬆安定</button>
+          <button class="quiz-option" onclick="answerQuiz(1,'B')"><span class="opt-letter">B</span>乾淨有秩序</button>
+          <button class="quiz-option" onclick="answerQuiz(1,'C')"><span class="opt-letter">C</span>空間流動順暢</button>
+          <button class="quiz-option" onclick="answerQuiz(1,'D')"><span class="opt-letter">D</span>有質感的氛圍</button>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-question" data-q="2">
+        <h3>你對理想空間的在意，<br>更接近哪一種？</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="answerQuiz(2,'A')"><span class="opt-letter">A</span>好整理，不費力</button>
+          <button class="quiz-option" onclick="answerQuiz(2,'B')"><span class="opt-letter">B</span>配色與材質要協調</button>
+          <button class="quiz-option" onclick="answerQuiz(2,'C')"><span class="opt-letter">C</span>動線與機能要合理</button>
+          <button class="quiz-option" onclick="answerQuiz(2,'D')"><span class="opt-letter">D</span>整體要有完整度與品味</button>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-question" data-q="3">
+        <h3>目前的空間，<br>最影響你生活品質的是哪一點？</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="answerQuiz(3,'A')"><span class="opt-letter">A</span>收納不足，容易凌亂</button>
+          <button class="quiz-option" onclick="answerQuiz(3,'B')"><span class="opt-letter">B</span>風格不一致</button>
+          <button class="quiz-option" onclick="answerQuiz(3,'C')"><span class="opt-letter">C</span>使用上不夠順手</button>
+          <button class="quiz-option" onclick="answerQuiz(3,'D')"><span class="opt-letter">D</span>空間有做，但還少了精緻感</button>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-question" data-q="4">
+        <h3>如果這次調整空間，<br>你最希望改善的是？</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="answerQuiz(4,'A')"><span class="opt-letter">A</span>讓生活更輕鬆</button>
+          <button class="quiz-option" onclick="answerQuiz(4,'B')"><span class="opt-letter">B</span>讓家更有整體感</button>
+          <button class="quiz-option" onclick="answerQuiz(4,'C')"><span class="opt-letter">C</span>讓使用更有效率</button>
+          <button class="quiz-option" onclick="answerQuiz(4,'D')"><span class="opt-letter">D</span>讓空間更符合自己的品味</button>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-question" data-q="5">
+        <h3>你比較期待設計帶來<br>哪一種改變？</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="answerQuiz(5,'A')"><span class="opt-letter">A</span>住起來更舒服</button>
+          <button class="quiz-option" onclick="answerQuiz(5,'B')"><span class="opt-letter">B</span>看起來更完整</button>
+          <button class="quiz-option" onclick="answerQuiz(5,'C')"><span class="opt-letter">C</span>用起來更順</button>
+          <button class="quiz-option" onclick="answerQuiz(5,'D')"><span class="opt-letter">D</span>呈現更成熟的生活質感</button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="quiz-result" id="resultA">
+        <p class="quiz-result-type">YOUR SPACE TYPE</p>
+        <h3>秩序生活型</h3>
+        <p>你重視的不是堆疊更多機能，而是讓空間回到清楚、有秩序的狀態。這類型適合從收納與配置優化開始，讓生活更輕鬆、更不費力。</p>
+        <a href="#contact" class="quiz-result-cta" onclick="closeLightbox()">預約空間規劃諮詢</a>
+        <br><button class="quiz-restart" onclick="restartQuiz()">重新測驗</button>
+      </div>
+
+      <div class="quiz-result" id="resultB">
+        <p class="quiz-result-type">YOUR SPACE TYPE</p>
+        <h3>氛圍質感型</h3>
+        <p>你在意的不只是功能，更重視材質、比例與整體感。這類型適合從軟裝、燈光、色彩與家具搭配著手，讓空間的氛圍與質感完整到位。</p>
+        <a href="#contact" class="quiz-result-cta" onclick="closeLightbox()">預約軟裝規劃諮詢</a>
+        <br><button class="quiz-restart" onclick="restartQuiz()">重新測驗</button>
+      </div>
+
+      <div class="quiz-result" id="resultC">
+        <p class="quiz-result-type">YOUR SPACE TYPE</p>
+        <h3>機能優化型</h3>
+        <p>你對空間最大的期待，是讓生活流程更順，使用起來更自然。這類型適合先做動線與櫃體邏輯整理，讓每天的使用更有效率。</p>
+        <a href="#contact" class="quiz-result-cta" onclick="closeLightbox()">預約空間診斷諮詢</a>
+        <br><button class="quiz-restart" onclick="restartQuiz()">重新測驗</button>
+      </div>
+
+      <div class="quiz-result" id="resultD">
+        <p class="quiz-result-type">YOUR SPACE TYPE</p>
+        <h3>整體升級型</h3>
+        <p>你需要的不是單點改善，而是一次把風格、機能與生活方式整合起來。這類型適合透過一對一諮詢，先建立完整方向，再逐步到位。</p>
+        <a href="#contact" class="quiz-result-cta" onclick="closeLightbox()">預約一對一付費諮詢</a>
+        <br><button class="quiz-restart" onclick="restartQuiz()">重新測驗</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <p class="section-label">PROCESS</p>
+    <h2 class="section-title">設計流程</h2>
+    <p class="section-subtitle" style="margin: 0 auto;">好的設計，不只是風格成立，而是生活成立。</p>
+
+    <div class="process-timeline">
+      <div class="process-step">
+        <div class="process-number">01</div>
+        <h4>初步諮詢</h4>
+        <p>了解需求與生活方式，釐清空間方向</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">02</div>
+        <h4>現場丈量</h4>
+        <p>實地勘查、空間分析與紀錄</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">03</div>
+        <h4>設計提案</h4>
+        <p>平面規劃、風格定義、材質選配</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">04</div>
+        <h4>工程施作</h4>
+        <p>專業團隊施工、品質控管</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">05</div>
+        <h4>完工交屋</h4>
+        <p>軟裝到位、空間完整呈現</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <p class="section-label">CONTACT</p>
+        <h2>預約諮詢</h2>
+        <p>每一次好的設計，都從理解開始。<br>歡迎預約諮詢，讓我們聊聊你理想中的生活空間。</p>
+        <div class="contact-details">
+          <a href="https://maps.google.com/?q=桃園市中壢區環西路75號1樓" target="_blank">&#9673;&ensp;桃園市中壢區環西路75號1樓（預約制）</a>
+          <a href="mailto:liginchen2002@gmail.com">&#9993;&ensp;liginchen2002@gmail.com</a>
+          <a href="https://lin.ee/PBacZfJ" target="_blank">&#9679;&ensp;LINE 官方帳號</a>
+          <a href="https://www.instagram.com/cora_sp9/" target="_blank">&#9673;&ensp;Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=100085703298617" target="_blank">&#9673;&ensp;Facebook</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <input type="text" placeholder="姓名" required>
+        <input type="tel" placeholder="聯絡電話" required>
+        <input type="email" placeholder="Email">
+        <select required>
+          <option value="" disabled selected>想了解的服務</option>
+          <option>空間諮詢</option>
+          <option>丈量規劃</option>
+          <option>全案設計</option>
+          <option>軟裝搭配</option>
+          <option>其他</option>
+        </select>
+        <textarea placeholder="簡單描述您的需求（空間坪數、目前狀況、期望等）"></textarea>
+        <button type="submit">送出諮詢</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="display:flex; justify-content:center; gap:2rem; margin-bottom:1.5rem;">
+      <a href="https://www.instagram.com/cora_sp9/" target="_blank" style="color:rgba(255,255,255,0.4); text-decoration:none; font-size:0.8rem; letter-spacing:2px; transition:color 0.3s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=100085703298617" target="_blank" style="color:rgba(255,255,255,0.4); text-decoration:none; font-size:0.8rem; letter-spacing:2px; transition:color 0.3s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Facebook</a>
+      <a href="https://lin.ee/PBacZfJ" target="_blank" style="color:rgba(255,255,255,0.4); text-decoration:none; font-size:0.8rem; letter-spacing:2px; transition:color 0.3s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">LINE</a>
+    </div>
+    <p>&copy; 2025 萌象空間 elePhant bud spacE. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // ===== NAV SCROLL =====
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // ===== MOBILE MENU =====
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('open');
+    }
+
+    // ===== HERO SLIDER =====
+    const slides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 5000);
+
+    // ===== SCROLL ANIMATIONS =====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 150);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.philosophy-card, .service-card, .process-step, .fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // ===== PORTFOLIO TABS =====
+    function switchProject(project) {
+      document.querySelectorAll('.portfolio-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.portfolio-item').forEach(item => {
+        if (project === 'all' || item.dataset.project === project) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // ===== LIGHTBOX =====
+    const lightboxImages = [];
+    document.querySelectorAll('.portfolio-item img').forEach(img => {
+      lightboxImages.push(img.src);
+    });
+    let lightboxIndex = 0;
+
+    function openLightbox(index) {
+      // Get only visible images
+      const visibleItems = [...document.querySelectorAll('.portfolio-item')].filter(i => i.style.display !== 'none');
+      lightboxImages.length = 0;
+      visibleItems.forEach(item => lightboxImages.push(item.querySelector('img').src));
+      lightboxIndex = Math.min(index, lightboxImages.length - 1);
+
+      // Find the correct index based on visible items
+      const clickedSrc = [...document.querySelectorAll('.portfolio-item')].filter(i => i.style.display !== 'none')[index]?.querySelector('img')?.src;
+      if (clickedSrc) {
+        lightboxIndex = lightboxImages.indexOf(clickedSrc);
+        if (lightboxIndex === -1) lightboxIndex = 0;
+      }
+
+      document.getElementById('lightbox').classList.add('active');
+      updateLightbox();
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navLightbox(dir) {
+      lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      document.getElementById('lightboxImg').src = lightboxImages[lightboxIndex];
+      document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+    });
+
+    // ===== QUIZ =====
+    const answers = {};
+
+    function answerQuiz(q, answer) {
+      answers[q] = answer;
+      const dots = document.querySelectorAll('.quiz-progress-dot');
+
+      if (q < 5) {
+        dots[q - 1].classList.remove('active');
+        dots[q - 1].classList.add('done');
+        dots[q].classList.add('active');
+
+        document.querySelector(`.quiz-question[data-q="${q}"]`).classList.remove('active');
+        document.querySelector(`.quiz-question[data-q="${q + 1}"]`).classList.add('active');
+      } else {
+        dots[q - 1].classList.remove('active');
+        dots[q - 1].classList.add('done');
+
+        document.querySelector(`.quiz-question[data-q="${q}"]`).classList.remove('active');
+
+        // Calculate result
+        const counts = { A: 0, B: 0, C: 0, D: 0 };
+        Object.values(answers).forEach(a => counts[a]++);
+        const result = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+
+        document.getElementById(`result${result}`).classList.add('active');
+      }
+    }
+
+    function restartQuiz() {
+      Object.keys(answers).forEach(k => delete answers[k]);
+      document.querySelectorAll('.quiz-result').forEach(r => r.classList.remove('active'));
+      document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+      document.querySelector('.quiz-question[data-q="1"]').classList.add('active');
+
+      const dots = document.querySelectorAll('.quiz-progress-dot');
+      dots.forEach(d => { d.classList.remove('active', 'done'); });
+      dots[0].classList.add('active');
+    }
+
+    // ===== FORM =====
+    function handleSubmit(e) {
+      e.preventDefault();
+      alert('感謝您的諮詢！我們將盡快與您聯繫。');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
